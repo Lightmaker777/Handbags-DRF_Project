@@ -1,4 +1,7 @@
-# Real-Time Chat
+
+![GIF](https://i.gifer.com/embedded/download/3QS8.gif)
+
+# HANDBAGS
 ## DRF project
 ### Create Django Rest project:
 - With own API.
