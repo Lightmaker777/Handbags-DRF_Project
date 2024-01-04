@@ -1,5 +1,5 @@
 
-![GIF](https://i.gifer.com/embedded/download/3QS8.gif)
+![Image gif](https://i.gifer.com/embedded/download/3QS8.gif)
 
 # HANDBAGS
 ## DRF project
