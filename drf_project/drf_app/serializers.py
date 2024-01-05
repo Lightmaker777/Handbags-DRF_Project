@@ -15,6 +15,14 @@ class HandbagSerializer(serializers.ModelSerializer):
         model = Handbag
         fields = '__all__'
 
+    def validate_price(self, value):
+        """
+        Validate that the price is a positive value.
+        """
+        if value < 0:
+            raise serializers.ValidationError("Price must be a positive value.")
+        return value
+
     def create(self, validated_data):
         brand_data = validated_data.pop('brand', None)
         
