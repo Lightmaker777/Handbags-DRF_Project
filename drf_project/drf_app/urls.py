@@ -1,3 +1,5 @@
+# drf_app/urls.py
+
 from django.urls import path
 from .views import HandbagList, HandbagDetail
 from django.urls import path, include
