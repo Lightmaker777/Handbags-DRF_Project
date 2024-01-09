@@ -3,7 +3,7 @@ from rest_framework import serializers
 from .models import Handbag, Brand
 
 
-class BrandSerializer(serializers.ModelSerializer):
+class BrandSerializer(serializers.ModelSerializer):    
     class Meta:
         model = Brand
         fields = '__all__'
