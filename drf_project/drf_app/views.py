@@ -9,14 +9,30 @@ import logging
 from rest_framework.exceptions import ValidationError
 from django.utils.html import escape, strip_tags
 from django.utils.text import slugify
+from drf_yasg.utils import swagger_auto_schema
+
 
 logger = logging.getLogger(__name__)
 
 class HandbagList(generics.ListCreateAPIView):
     queryset = Handbag.objects.all()
     serializer_class = HandbagSerializer
-    #authentication_classes = [TokenAuthentication]
-    #permission_classes = [IsAdminOrReadOnly, permissions.IsAuthenticatedOrReadOnly]
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAdminOrReadOnly, permissions.IsAuthenticatedOrReadOnly]
+
+    @swagger_auto_schema(operation_description='Retrieve a list of handbags')
+    def get(self, request, *args, **kwargs):
+        return super().get(request, *args, **kwargs)
+    
+    @swagger_auto_schema(operation_description='Add another handbag')
+    def post(self, request, *args, **kwargs):
+        return super().post(request, *args, **kwargs)
+    
+    def perform_create(self, serializer):
+        try :
+            serializer.save()           
+        except ValidationError as e:
+            raise ValidationError(detail=e.detail)
 
     def get_queryset(self):
         handbags = Handbag.objects.all()
@@ -58,17 +74,29 @@ class HandbagList(generics.ListCreateAPIView):
 class HandbagDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Handbag.objects.all()
     serializer_class = HandbagSerializer
-    #authentication_classes = [TokenAuthentication]
-    #permission_classes = [IsAdminOrReadOnly, permissions.IsAuthenticatedOrReadOnly]
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAdminOrReadOnly, permissions.IsAuthenticatedOrReadOnly]
+
+    @swagger_auto_schema(operation_description='Retrieve a handbag by ID')
+    def get(self, request, *args, **kwargs):
+        return super().get(request, *args, **kwargs)
+    
+    @swagger_auto_schema(operation_description='Update a single handbag')
+    def put(self, request, *args, **kwargs):
+        return super().put(request, *args, **kwargs)
+    
+    @swagger_auto_schema(operation_description='Delete a handbag')
+    def delete(self, request, *args, **kwargs):
+        return super().delete(request, *args, **kwargs)
 
 class HandbagViewSet(viewsets.ModelViewSet):
     queryset = Handbag.objects.all()
     serializer_class = HandbagSerializer
-    #permission_classes = [IsAdminOrReadOnly, permissions.IsAuthenticatedOrReadOnly]
-    #authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAdminOrReadOnly, permissions.IsAuthenticatedOrReadOnly]
+    authentication_classes = [TokenAuthentication]
 
 class BrandViewSet(viewsets.ModelViewSet):
     queryset = Brand.objects.all()
     serializer_class = BrandSerializer
-    #permission_classes = [IsAdminOrReadOnly, permissions.IsAuthenticatedOrReadOnly]
-    #authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAdminOrReadOnly, permissions.IsAuthenticatedOrReadOnly]
+    authentication_classes = [TokenAuthentication]

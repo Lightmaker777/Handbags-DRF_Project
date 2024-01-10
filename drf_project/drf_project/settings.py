@@ -26,7 +26,9 @@ INSTALLED_APPS = [
     'rest_framework',
     "rest_framework.authtoken",    
     'drf_app',
+    "drf_yasg",
 ]
+
 REST_FRAMEWORK = {
    'DEFAULT_AUTHENTICATION_CLASSES': [
        'rest_framework.authentication.TokenAuthentication',
@@ -34,6 +36,7 @@ REST_FRAMEWORK = {
        'rest_framework.authentication.BasicAuthentication',
    ],
 }
+
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
@@ -45,6 +48,16 @@ LOGGING = {
     'root': {
         'handlers': ['console'],
         'level': 'INFO',  # Set the desired logging level (DEBUG, INFO, WARNING, ERROR, CRITICAL)
+    },
+}
+
+SWAGGER_SETTINGS = {
+    'SECURITY_DEFINITIONS': {
+        'api_key': {
+            'type': 'apiKey',
+            'in': 'header',
+            'name': 'Authorization'
+        }
     },
 }
 

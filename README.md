@@ -9,6 +9,8 @@
 - Use at least one relation between models (1 to 1, many to 1, many to many)
 - Use external API to consume
 - Add permission and authentication to the project
-- Add validation to your API
+- Add validation to API
 - Sanitize it and make it clean
-- Be creative
+- Create tests for API
+- Create ci/cd pipeline using github actions or anything else 
+- Add swagger/openapi and redoc documentation to API
