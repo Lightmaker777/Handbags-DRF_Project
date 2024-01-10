@@ -1,11 +1,21 @@
 # drf_app/tests.py
 from rest_framework import status
-from rest_framework.test import APITestCase
+from rest_framework.test import APITestCase, APIClient
+from django.utils.text import slugify
 from django.urls import reverse
 from .models import Handbag, Brand
+from rest_framework.authtoken.models import Token
+from django.contrib.auth.models import User
 
 class HandbagTests(APITestCase):
     def setUp(self):
+        self.client = APIClient()
+        self.admin_user = User.objects.create_superuser(
+            'admin','admin@test.py','testpassword'
+        )
+        self.token = Token.objects.create(user = self.admin_user)
+        self.user = User.objects.create_user("user", "admin@test.com", "testpassword")
+        self.user_token = Token.objects.create(user=self.user)
         self.brand = Brand.objects.create(name="TestBrand", description="Test Description")
         self.handbag_data = {
             "brand": {"name": "TestBrand", "description": "Brand Description"},
