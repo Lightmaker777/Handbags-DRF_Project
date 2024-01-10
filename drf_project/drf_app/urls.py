@@ -22,8 +22,8 @@ schema_view = get_schema_view(
 )
 
 urlpatterns = [
-    path('handbags/',HandbagList.as_view()),
-    path('handbags/<int:pk>/',HandbagDetail.as_view()),   
+    path('handbags/',HandbagList.as_view(), name='handbag-list'),
+    path('handbags/<int:pk>/',HandbagDetail.as_view(), name='handbag-detail'),   
     path('openapi/',schema_view.without_ui(cache_timeout=0)),
     path('swagger/',schema_view.with_ui('swagger',cache_timeout=0),name='schema-swagger-ui'),
     path('redoc/',schema_view.with_ui('redoc',cache_timeout=0),name='schema-redoc'),
