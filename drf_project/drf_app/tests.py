@@ -18,6 +18,7 @@ class HandbagTests(APITestCase):
         self.url = reverse('handbag-list')
 
     def test_create_handbag(self):
+        self.client.credentials(HTTP_AUTHORIZATION="Token " + self.token.key)
         response = self.client.post(self.url, self.handbag_data, format='json')
         if response.status_code != status.HTTP_201_CREATED:
             print(response.content)
