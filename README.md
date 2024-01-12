@@ -14,3 +14,4 @@
 - Create tests for API
 - Create ci/cd pipeline using github actions or anything else 
 - Add swagger/openapi and redoc documentation to API
+- Add Filters and Lookups
