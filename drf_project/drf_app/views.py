@@ -10,15 +10,26 @@ from rest_framework.exceptions import ValidationError
 from django.utils.html import escape, strip_tags
 from django.utils.text import slugify
 from drf_yasg.utils import swagger_auto_schema
+import django_filters
+import django_filters.rest_framework as filters
 
 
 logger = logging.getLogger(__name__)
+
+class HandbagFilter(django_filters.FilterSet):
+    price = filters.NumberFilter(field_name='price',lookup_expr='startswith')
+    color = filters.CharFilter(field_name='color',lookup_expr='startswith')
+    class Meta:
+        model = Handbag
+        fields = ['brand', 'price', 'color']
 
 class HandbagList(generics.ListCreateAPIView):
     queryset = Handbag.objects.all()
     serializer_class = HandbagSerializer
     authentication_classes = [TokenAuthentication]
     permission_classes = [IsAdminOrReadOnly, permissions.IsAuthenticatedOrReadOnly]
+    filter_backends = [django_filters.rest_framework.DjangoFilterBackend]    
+    filterset_class = HandbagFilter
 
     @swagger_auto_schema(operation_description='Retrieve a list of handbags')
     def get(self, request, *args, **kwargs):
